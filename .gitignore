@@ -1,0 +1,23 @@
+# Секреты — никогда в общее хранилище
+.env
+*.env
+!.env.example
+*token*.txt
+*secret*
+credentials.json
+
+# Личное: всё, что нельзя показывать остальным, кладём сюда — сюда же и остаётся
+_личное/
+_private/
+
+# Системный мусор
+.DS_Store
+Thumbs.db
+~$*
+*.tmp
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
