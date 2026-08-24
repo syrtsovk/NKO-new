@@ -82,6 +82,8 @@ def sobrat_pisma() -> list:
     for put in sorted(PAPKA_ORGANIZACIY.rglob("Переписка/*.md")):
         if put.name.startswith("_"):
             continue
+        if "Архив" in put.parts:  # закрытые дела прошлых лет не мешают текущей работе
+            continue
         polya = chitat_shapku(put)
         if not polya:
             continue
@@ -326,6 +328,9 @@ def main() -> int:
     SVODKA.parent.mkdir(parents=True, exist_ok=True)
     SVODKA.write_text(sobrat_svodku(itogi, segodnya, len(v_rabote)), encoding="utf-8")
     print(f"Сводка собрана: {SVODKA.relative_to(KOREN)}")
+
+    import karta  # ленивый импорт: karta берёт разбор карточек отсюда же
+    karta.main()
 
     goryachih = sum(
         len([z for z in itogi[k] if gorit(z)])
